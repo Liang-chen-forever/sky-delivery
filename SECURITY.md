@@ -1,7 +1,7 @@
-# Security Policy
+# 安全策略
 
-Do not commit passwords, access keys, API tokens, private keys, certificates, local configuration files, or user data to this repository.
+请勿向本仓库提交密码、访问密钥、API Token、私钥、证书、本地配置文件或用户数据。
 
-If a credential is accidentally exposed, revoke or rotate it immediately in the relevant provider console, then remove it from the working tree and Git history before publishing again. Report the incident privately to the repository owner rather than opening a public issue.
+如果不慎暴露凭据，请立即在对应服务商控制台中吊销或轮换凭据，然后从工作区和 Git 历史中清除相关内容，再重新发布仓库。安全事件请私下联系仓库所有者，不要直接创建公开 Issue。
 
-The example configuration in `sky-take-out/sky-server/src/main/resources/application-dev.example.yml` contains placeholders only. Local `application-dev.yml` and WeChat private project configuration are intentionally ignored.
+`sky-take-out/sky-server/src/main/resources/application-dev.example.yml` 只包含配置占位符。实际使用的 `application-dev.yml` 和微信小程序私有项目配置已被 Git 忽略。

@@ -1,47 +1,47 @@
 # Sky Delivery
 
-Sky Delivery is an internship project for a food ordering and delivery platform. It contains a Spring Boot backend, a Vue-built administration frontend served by Nginx, and a WeChat mini-program client.
+Sky Delivery 是一个外卖配送平台实习项目，包含 Spring Boot 后端、由 Vue 构建并通过 Nginx 部署的管理端前端，以及微信小程序客户端。
 
-## Repository Layout
+## 项目结构
 
-- `sky-take-out/`: Maven multi-module backend (`sky-common`, `sky-pojo`, `sky-server`)
-- `frontend/`: packaged administration frontend and local Nginx configuration
-- `mp-weixin/`: WeChat mini-program source and generated client assets
-- `苍穹外卖-消息队列延迟关单-落地清单.md`: implementation notes for delayed order closing with a message queue
+- `sky-take-out/`：Maven 多模块后端项目，包含 `sky-common`、`sky-pojo` 和 `sky-server`
+- `frontend/`：管理端前端构建产物及本地 Nginx 配置
+- `mp-weixin/`：微信小程序源码及生成的客户端资源
+- `苍穹外卖-消息队列延迟关单-落地清单.md`：基于消息队列实现订单延迟关单的落地记录
 
-## Prerequisites
+## 环境要求
 
-- JDK 8 or a compatible JDK configured for the project's Maven compiler settings
+- JDK 8，并在 Maven 或 IDE 中正确配置
 - Maven 3.8+
-- MySQL 8.x and Redis
-- WeChat Developer Tools for the mini-program client
-- Nginx on Windows if serving the packaged administration frontend locally
+- MySQL 8.x 和 Redis
+- 微信开发者工具
+- 如果需要在本地运行管理端前端，需要 Windows 版 Nginx
 
-## Backend Setup
+## 后端启动
 
-1. Create the `sky_take_out` database and import the schema/data script used by your local environment.
-2. Copy `sky-take-out/sky-server/src/main/resources/application-dev.example.yml` to `application-dev.yml`.
-3. Fill in local database, Redis, object storage, WeChat, and Baidu Map values. Keep the copied file local; it is intentionally ignored by Git.
-4. Start the backend from `sky-take-out/`:
+1. 创建 `sky_take_out` 数据库，并导入本地环境使用的数据库结构和初始化数据。
+2. 将 `sky-take-out/sky-server/src/main/resources/application-dev.example.yml` 复制为 `application-dev.yml`。
+3. 填写数据库、Redis、对象存储、微信和百度地图配置。复制后的配置文件仅保留在本地，已被 Git 忽略。
+4. 进入 `sky-take-out/` 目录启动后端：
 
 ```bash
 mvn spring-boot:run -pl sky-server -am
 ```
 
-The backend listens on `http://localhost:8080` by default.
+后端默认监听 `http://localhost:8080`。
 
-## Administration Frontend
+## 管理端前端
 
-The packaged frontend is under `frontend/nginx-1.20.2/html/sky`. Review `frontend/nginx-1.20.2/conf/nginx.conf`, start Nginx from a path without Chinese characters, and use the configured local HTTP port. Nginx forwards API requests to the backend.
+管理端前端位于 `frontend/nginx-1.20.2/html/sky`。请先查看 `frontend/nginx-1.20.2/conf/nginx.conf`，然后从不包含中文字符的路径启动 Nginx，并通过配置的本地 HTTP 端口访问。Nginx 会将 API 请求转发到后端服务。
 
-## WeChat Mini-program
+## 微信小程序
 
-Open `mp-weixin/` in WeChat Developer Tools and configure the local backend URL in the generated client configuration when needed. The checked-in `project.private.config.json` is intentionally excluded because it is a machine-specific override.
+使用微信开发者工具打开 `mp-weixin/`。如有需要，请在生成的客户端配置中设置本地后端地址。仓库不包含 `project.private.config.json`，因为该文件是与开发机器相关的私有覆盖配置。
 
-## Security Boundary
+## 安全边界
 
-This repository is prepared for source-code review and portfolio use. Production credentials, private keys, certificates, request logs, local databases, IDE metadata, dependency caches, build output, and the Nginx executable are excluded. See [SECURITY.md](SECURITY.md) for reporting guidance.
+本仓库已按源码审查和项目展示场景整理。生产凭据、私钥、证书、请求日志、本地数据库、IDE 配置、依赖缓存、构建产物和 Nginx 可执行文件均未提交。详细说明请参阅 [SECURITY.md](SECURITY.md)。
 
-## Status
+## 项目状态
 
-This is an internship project. Local infrastructure and third-party credentials are required for a complete end-to-end run; payment and production WeChat integrations are not configured in this repository.
+这是一个实习项目。完整运行需要本地基础设施和第三方服务凭据；仓库未配置生产环境的微信支付和微信小程序参数。
