@@ -1,0 +1,42 @@
+# Copy this file to application-dev.yml and replace values for your local environment.
+sky:
+  jwt:
+    admin-secret-key: ${SKY_JWT_ADMIN_SECRET_KEY:}
+    user-secret-key: ${SKY_JWT_USER_SECRET_KEY:}
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: ${SKY_DB_HOST:localhost}
+    port: ${SKY_DB_PORT:3306}
+    database: ${SKY_DB_NAME:sky_take_out}
+    username: ${SKY_DB_USERNAME:root}
+    password: ${SKY_DB_PASSWORD:}
+
+  alioss:
+    endpoint: ${SKY_OSS_ENDPOINT:http://localhost:9000}
+    access-key-id: ${SKY_OSS_ACCESS_KEY_ID:}
+    access-key-secret: ${SKY_OSS_ACCESS_KEY_SECRET:}
+    bucket-name: ${SKY_OSS_BUCKET_NAME:sky-take-out}
+
+  redis:
+    host: ${SKY_REDIS_HOST:localhost}
+    port: ${SKY_REDIS_PORT:6379}
+    password: ${SKY_REDIS_PASSWORD:}
+    database: ${SKY_REDIS_DATABASE:0}
+
+  wechat:
+    appid: ${SKY_WECHAT_APP_ID:}
+    secret: ${SKY_WECHAT_SECRET:}
+    mch-id: ${SKY_WECHAT_MCH_ID:}
+    mch-serial-no: ${SKY_WECHAT_MCH_SERIAL_NO:}
+    private-key-file-path: ${SKY_WECHAT_PRIVATE_KEY_FILE_PATH:}
+    api-v3-key: ${SKY_WECHAT_API_V3_KEY:}
+    wechat-pay-cert-file-path: ${SKY_WECHAT_PAY_CERT_FILE_PATH:}
+    notify-url: ${SKY_WECHAT_NOTIFY_URL:}
+    refund-notify-url: ${SKY_WECHAT_REFUND_NOTIFY_URL:}
+
+  shop:
+    address: ${SKY_SHOP_ADDRESS:}
+
+  baidu:
+    ak: ${SKY_BAIDU_AK:}
