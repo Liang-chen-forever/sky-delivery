@@ -24,6 +24,20 @@ sky:
     password: ${SKY_REDIS_PASSWORD:}
     database: ${SKY_REDIS_DATABASE:0}
 
+  rabbitmq:
+    host: ${SKY_RABBITMQ_HOST:localhost}
+    port: ${SKY_RABBITMQ_PORT:5672}
+    username: ${SKY_RABBITMQ_USERNAME:guest}
+    password: ${SKY_RABBITMQ_PASSWORD:guest}
+    virtual-host: ${SKY_RABBITMQ_VIRTUAL_HOST:/}
+
+  order:
+    timeout-minutes: ${SKY_ORDER_TIMEOUT_MINUTES:15}
+    outbox-batch-size: ${SKY_ORDER_OUTBOX_BATCH_SIZE:100}
+    outbox-relay-delay-ms: ${SKY_ORDER_OUTBOX_RELAY_DELAY_MS:1000}
+    outbox-retry-delay-seconds: ${SKY_ORDER_OUTBOX_RETRY_DELAY_SECONDS:30}
+    publisher-confirm-timeout-ms: ${SKY_ORDER_PUBLISHER_CONFIRM_TIMEOUT_MS:5000}
+
   wechat:
     appid: ${SKY_WECHAT_APP_ID:}
     secret: ${SKY_WECHAT_SECRET:}

@@ -4,3 +4,20 @@
 *.class
 *Test.java
 **/test/
+# Track the order-close messaging regression tests.
+!sky-server/src/test/
+!sky-server/src/test/java/
+!sky-server/src/test/java/com/
+!sky-server/src/test/java/com/sky/
+!sky-server/src/test/java/com/sky/mq/
+!sky-server/src/test/java/com/sky/mq/OrderCloseConsumerTest.java
+!sky-server/src/test/java/com/sky/mq/OrderCloseMessagePublisherTest.java
+!sky-server/src/test/java/com/sky/mq/OrderCloseOutboxRelayTest.java
+!sky-server/src/test/java/com/sky/mq/OrderCloseProducerTest.java
+!sky-server/src/test/java/com/sky/mq/OrderCloseOutboxSqlContractTest.java
+!sky-server/src/test/java/com/sky/mq/OrderCloseSqlContractTest.java
+!sky-server/src/test/java/com/sky/mq/RabbitMQConfigTest.java
+!sky-server/src/test/java/com/sky/service/
+!sky-server/src/test/java/com/sky/service/impl/
+!sky-server/src/test/java/com/sky/service/impl/OrderCloseServiceImplTest.java
+!sky-server/src/test/java/com/sky/service/impl/OrderServiceImplOutboxContractTest.java

@@ -17,6 +17,20 @@ spring:
     port: ${sky.redis.port}
     password: ${sky.redis.password}
     database: ${sky.redis.database}
+  rabbitmq:
+    host: ${sky.rabbitmq.host:localhost}
+    port: ${sky.rabbitmq.port:5672}
+    username: ${sky.rabbitmq.username:guest}
+    password: ${sky.rabbitmq.password:guest}
+    virtual-host: ${sky.rabbitmq.virtual-host:/}
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 10
 
 mybatis:
   #mapper配置文件

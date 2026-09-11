@@ -13,6 +13,7 @@ import com.sky.exception.AddressBookBusinessException;
 import com.sky.exception.OrderBusinessException;
 import com.sky.exception.ShoppingCartBusinessException;
 import com.sky.mapper.*;
+import com.sky.mq.OrderCloseProducer;
 import com.sky.result.PageResult;
 import com.sky.service.OrderService;
 import com.sky.utils.HttpClientUtil;
@@ -68,6 +69,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private WebSocketServer webSocketServer;
 
+    @Autowired
+    private OrderCloseProducer orderCloseProducer;
+
 
     /**
      * 用户下单
@@ -115,6 +119,9 @@ public class OrderServiceImpl implements OrderService {
         orders.setUserId(userId);
 
         orderMapper.insert(orders);
+
+        //在同一事务内写入延迟关单outbox记录，保证订单与关单消息的原子性
+        orderCloseProducer.createMessage(orders.getId());
 
         List<OrderDetail> orderDetailList = new ArrayList<>();
         //向订单明细表插入多数据

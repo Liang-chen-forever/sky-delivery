@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.mapper.OrderCloseOutboxMapper">
+    <insert id="insert" parameterType="com.sky.entity.OrderCloseOutbox" useGeneratedKeys="true" keyProperty="id">
+        insert into order_close_outbox
+        (message_id, order_id, payload, status, retry_count, next_retry_time, last_error, create_time, update_time)
+        values (#{messageId}, #{orderId}, #{payload}, #{status}, #{retryCount}, #{nextRetryTime}, #{lastError},
+                #{createTime}, #{updateTime})
+    </insert>
+
+    <select id="findPending" resultType="com.sky.entity.OrderCloseOutbox">
+        select *
+        from order_close_outbox
+        where status = 0
+          and next_retry_time &lt;= #{now}
+        order by id
+        limit #{limit}
+    </select>
+
+    <update id="markPublished">
+        update order_close_outbox
+        set status = 1, update_time = #{updateTime}
+        where id = #{id} and status = 0
+    </update>
+
+    <update id="markRetry">
+        update order_close_outbox
+        set retry_count = #{retryCount},
+            next_retry_time = #{nextRetryTime},
+            last_error = #{lastError},
+            update_time = #{updateTime}
+        where id = #{id} and status = 0
+    </update>
+</mapper>

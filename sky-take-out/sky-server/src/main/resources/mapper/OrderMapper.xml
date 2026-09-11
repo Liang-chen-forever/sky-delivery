@@ -12,6 +12,17 @@
                 #{estimatedDeliveryTime}, #{deliveryStatus}, #{packAmount}, #{tablewareNumber}, #{tablewareStatus})
     </insert>
 
+    <!--    原子关单：条件更新保证与支付回调并发时的安全 -->
+    <update id="closeIfPending">
+        update orders
+        set status = #{closedStatus},
+            cancel_reason = #{cancelReason},
+            cancel_time = #{cancelTime}
+        where id = #{id}
+          and status = #{pendingStatus}
+          and pay_status = #{unpaidStatus}
+    </update>
+
     <!--    修改订单信息-->
     <update id="update">
         update orders

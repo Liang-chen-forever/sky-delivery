@@ -23,26 +23,8 @@ public class OrderTask {
 
 
     /**
-     * 处理超时订单
+     * 处理超时订单：已迁移至RabbitMQ延迟关单（本地消息表 + TTL死信队列），见com.sky.mq包
      */
-    @Scheduled(cron = "0 * * * * ?")  //每分钟触发一次
-    public void processTimeoutOrder() {
-        log.info("定时处理超时订单：{}", LocalDateTime.now());
-
-        LocalDateTime time = LocalDateTime.now().plusMinutes(-15);
-
-        //select * from order where status = ? and order_time < (当前时间 - 15分钟)
-        List<Orders> list = orderMapper.getByStatusAndOrderTimeLT(Orders.PENDING_PAYMENT, time);
-
-        if(list != null && list.size() > 0) {
-            for(Orders orders : list) {
-                orders.setStatus(Orders.CANCELLED);
-                orders.setCancelReason("订单超时自动取消");
-                orders.setCancelTime(LocalDateTime.now());
-                orderMapper.update(orders);
-            }
-        }
-    }
 
 
 

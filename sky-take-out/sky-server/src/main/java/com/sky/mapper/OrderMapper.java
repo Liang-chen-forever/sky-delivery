@@ -25,6 +25,23 @@ public interface OrderMapper {
     void insert(Orders orders);
 
     /**
+     * 原子关单：仅当订单仍为待支付且未支付时才取消，避免与支付回调并发时误取消已支付订单
+     * @param id 订单id
+     * @param pendingStatus 待支付状态
+     * @param unpaidStatus 未支付状态
+     * @param closedStatus 取消状态
+     * @param cancelReason 取消原因
+     * @param cancelTime 取消时间
+     * @return 影响行数，0表示订单已不满足关单条件
+     */
+    int closeIfPending(@Param("id") Long id,
+                       @Param("pendingStatus") Integer pendingStatus,
+                       @Param("unpaidStatus") Integer unpaidStatus,
+                       @Param("closedStatus") Integer closedStatus,
+                       @Param("cancelReason") String cancelReason,
+                       @Param("cancelTime") LocalDateTime cancelTime);
+
+    /**
      * 根据订单号查询订单
      * @param orderNumber
      */
