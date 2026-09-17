@@ -10,3 +10,6 @@
 *.woff2 binary
 *.xlsx binary
 *.exe binary
+frontend/** linguist-detectable=false
+mp-weixin/** linguist-detectable=false
+docs/** linguist-documentation
