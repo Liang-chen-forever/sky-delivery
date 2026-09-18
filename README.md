@@ -7,7 +7,7 @@ Sky Delivery 是一个外卖配送平台个人实践项目，包含 Spring Boot 
 - `sky-take-out/`：Maven 多模块后端项目，包含 `sky-common`、`sky-pojo` 和 `sky-server`
 - `frontend/`：管理端前端构建产物及本地 Nginx 配置
 - `mp-weixin/`：微信小程序源码及生成的客户端资源
-- `苍穹外卖-消息队列延迟关单-落地清单.md`：基于消息队列实现订单延迟关单的落地记录
+- `docs/消息队列延迟关单改造落地清单.md`：基于消息队列实现订单延迟关单的落地记录
 
 ## 环境要求
 
